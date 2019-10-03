@@ -5,15 +5,21 @@ import { Button, Card, Form, Input, Container, Row, Col } from 'reactstrap';
 
 // core components
 import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
+// redux func
+import { register } from '../js/actions/auth';
+import { connect } from 'react-redux';
 
-function RegisterPage() {
+function RegisterPage({ register }) {
   const [userInfo, setuserCred] = React.useState({
     fullName: '',
     mail: '',
     password: '',
     password2: ''
   });
-
+  const addUser = () => {
+    // register({ name, lastName, mail, password, avatar });
+    register(userInfo);
+  };
   const onChangeHandler = e => {
     setuserCred({ ...userInfo, [e.target.name]: e.target.value });
     console.log('TCL: RegisterPage -> userInfo', userInfo);
@@ -41,32 +47,6 @@ function RegisterPage() {
             <Col className='ml-auto mr-auto' lg='4'>
               <Card className='card-register ml-auto mr-auto'>
                 <h3 className='title mx-auto'>Bienvenu</h3>
-                {/* <div className='social-line text-center'>
-                  <Button
-                    className='btn-neutral btn-just-icon mr-1'
-                    color='facebook'
-                    href='#pablo'
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className='fa fa-facebook-square' />
-                  </Button>
-                  <Button
-                    className='btn-neutral btn-just-icon mr-1'
-                    color='google'
-                    href='#pablo'
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className='fa fa-google-plus' />
-                  </Button>
-                  <Button
-                    className='btn-neutral btn-just-icon'
-                    color='twitter'
-                    href='#pablo'
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className='fa fa-twitter' />
-                  </Button>
-      </div>*/}
                 <Form className='register-form'>
                   <label>Nom complet</label>
                   <Input
@@ -96,7 +76,12 @@ function RegisterPage() {
                     name='password2'
                     onChange={onChangeHandler}
                   />
-                  <Button block className='btn-round' color='danger'>
+                  <Button
+                    block
+                    className='btn-round'
+                    color='danger'
+                    onClick={addUser}
+                  >
                     S'inscrire
                   </Button>
                 </Form>
@@ -115,4 +100,7 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default connect(
+  null,
+  { register }
+)(RegisterPage);

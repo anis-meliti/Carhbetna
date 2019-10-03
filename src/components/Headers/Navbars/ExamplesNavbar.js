@@ -54,8 +54,7 @@ function ExamplesNavbar() {
         <div className='navbar-translate'>
           <NavbarBrand
             data-placement='bottom'
-            to='/index'
-            target='_blank'
+            to='/'
             title='Coded by Creative Tim'
             tag={Link}
           >

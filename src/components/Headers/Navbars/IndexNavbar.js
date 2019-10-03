@@ -1,6 +1,12 @@
 import React from 'react';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
+// react router
+import { Link } from 'react-router-dom';
+// redux
+import { useSelector, connect } from 'react-redux';
+import { logout } from '../../../js/actions/auth';
+import { clearProfile } from '../../../js/actions/profile';
 // reactstrap components
 import {
   Button,
@@ -10,11 +16,13 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container
+  Container,
+  Spinner
 } from 'reactstrap';
+// My Components
 import SignInModal from '../../Modals/SignInModal';
 
-function IndexNavbar() {
+function IndexNavbar({ logout, clearProfile }) {
   const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
@@ -44,16 +52,63 @@ function IndexNavbar() {
       window.removeEventListener('scroll', updateNavbarColor);
     };
   });
+  // the modal set
   const [loginModal, setloginModal] = React.useState(false);
-  return (
+  // loading user
+  const isAuth = useSelector(state => state.auth.isAuth);
+  const user = useSelector(state => state.auth.user);
+  const loading = useSelector(state => state.auth.loading);
+  const visitorNavbar = (
+    <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
+      <Nav navbar>
+        <NavItem>
+          <Link to='/register'>
+            <NavLink>
+              <i className='nc-icon' />
+              inscription
+            </NavLink>
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Button
+            className='btn-round'
+            color='danger'
+            onClick={() => setloginModal(true)}
+          >
+            connexion
+          </Button>
+        </NavItem>
+      </Nav>
+    </Collapse>
+  );
+  const authNavbar = (
+    <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
+      <Nav navbar>
+        <NavItem>
+          <Button
+            className='btn-round'
+            color='danger'
+            onClick={() => {
+              logout();
+              clearProfile();
+            }}
+          >
+            Se déconnecter
+          </Button>
+        </NavItem>
+      </Nav>
+    </Collapse>
+  );
+  return !loading ? (
+    <Spinner color='primary' />
+  ) : (
     <>
       <Navbar className={classnames('fixed-top', navbarColor)} expand='lg'>
         <Container>
           <div className='navbar-translate'>
             <NavbarBrand
               data-placement='bottom'
-              href='/index'
-              target='_blank'
+              href='/'
               title='Coded by Creative Tim'
             >
               Carhbetna
@@ -70,28 +125,7 @@ function IndexNavbar() {
               <span className='navbar-toggler-bar bar3' />
             </button>
           </div>
-          <Collapse
-            className='justify-content-end'
-            navbar
-            isOpen={navbarCollapse}
-          >
-            <Nav navbar>
-              <NavItem>
-                <NavLink>
-                  <i className='nc-icon' /> inscription
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <Button
-                  className='btn-round'
-                  color='danger'
-                  onClick={() => setloginModal(true)}
-                >
-                  connexion
-                </Button>
-              </NavItem>
-            </Nav>
-          </Collapse>
+          {isAuth ? authNavbar : visitorNavbar}
         </Container>
       </Navbar>
 
@@ -100,4 +134,7 @@ function IndexNavbar() {
   );
 }
 
-export default IndexNavbar;
+export default connect(
+  null,
+  { logout, clearProfile }
+)(IndexNavbar);

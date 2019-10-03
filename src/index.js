@@ -8,6 +8,13 @@ import './assets/css/paper-kit.min.css';
 import './assets/css/paper-kit.css.map';
 // import './assets/demo/demo.css';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import store from './js/store/index';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
 serviceWorker.unregister();
