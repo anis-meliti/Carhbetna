@@ -1,6 +1,6 @@
 import React from 'react';
 // reactstrap components
-import { Modal, FormGroup, Input, Button } from 'reactstrap';
+import { Modal, FormGroup, Input, Button, Spinner } from 'reactstrap';
 // redux
 import { connect, useSelector } from 'react-redux';
 import { loginUser } from '../../js/actions/auth';
@@ -17,12 +17,15 @@ const SignInModal = ({ isOpen, toggle, loginUser }) => {
     setuserCred({ ...userCred, [e.target.name]: e.target.value });
   };
   const isAuth = useSelector(state => state.auth.isAuth);
+  const loading = useSelector(state => state.auth.loading);
 
   const logUser = () => {
     loginUser(userCred);
   };
 
-  return isAuth ? (
+  return loading ? (
+    <Spinner color='primary' className='mx-auto my-auto' />
+  ) : isAuth ? (
     <Redirect to='/' />
   ) : (
     <Modal isOpen={isOpen} modalClassName='modal-register'>

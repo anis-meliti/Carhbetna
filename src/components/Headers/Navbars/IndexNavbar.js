@@ -85,8 +85,10 @@ function IndexNavbar({ logout, clearProfile }) {
     <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
       <Nav navbar>
         <NavItem>
-          <i className='nc-icon' />
-          {user.name}
+          <NavLink href='/profile'>
+            <i className='nc-icon' />
+            {user.name}
+          </NavLink>
         </NavItem>
         <NavItem>
           <Button

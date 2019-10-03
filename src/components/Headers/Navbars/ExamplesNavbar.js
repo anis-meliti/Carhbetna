@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
-
+// redux
+import { connect } from 'react-redux';
+import { logout } from '../../../js/actions/auth';
+import { clearProfile } from '../../../js/actions/profile';
 // reactstrap components
 import {
   Collapse,
@@ -11,10 +14,11 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container
+  Container,
+  Button
 } from 'reactstrap';
 
-function ExamplesNavbar() {
+function ExamplesNavbar({ logout, clearProfile }) {
   const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
@@ -79,9 +83,17 @@ function ExamplesNavbar() {
         >
           <Nav navbar>
             <NavItem>
-              <NavLink to='/index' tag={Link}>
-                <i className='nc-icon nc-layout-11' />
-                S'identifier
+              <NavLink>
+                <Button
+                  className='btn-round'
+                  color='danger'
+                  onClick={() => {
+                    logout();
+                    clearProfile();
+                  }}
+                >
+                  Se déconnecter
+                </Button>
               </NavLink>
             </NavItem>
 
@@ -125,4 +137,7 @@ function ExamplesNavbar() {
   );
 }
 
-export default ExamplesNavbar;
+export default connect(
+  null,
+  { logout, clearProfile }
+)(ExamplesNavbar);
