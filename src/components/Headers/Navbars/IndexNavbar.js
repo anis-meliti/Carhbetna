@@ -12,6 +12,7 @@ import {
   Nav,
   Container
 } from 'reactstrap';
+import SignInModal from '../../Modals/SignInModal';
 
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
@@ -43,58 +44,59 @@ function IndexNavbar() {
       window.removeEventListener('scroll', updateNavbarColor);
     };
   });
+  const [loginModal, setloginModal] = React.useState(false);
   return (
-    <Navbar className={classnames('fixed-top', navbarColor)} expand='lg'>
-      <Container>
-        <div className='navbar-translate'>
-          <NavbarBrand
-            data-placement='bottom'
-            href='/index'
-            target='_blank'
-            title='Coded by Creative Tim'
+    <>
+      <Navbar className={classnames('fixed-top', navbarColor)} expand='lg'>
+        <Container>
+          <div className='navbar-translate'>
+            <NavbarBrand
+              data-placement='bottom'
+              href='/index'
+              target='_blank'
+              title='Coded by Creative Tim'
+            >
+              Carhbetna
+            </NavbarBrand>
+            <button
+              aria-expanded={navbarCollapse}
+              className={classnames('navbar-toggler navbar-toggler', {
+                toggled: navbarCollapse
+              })}
+              onClick={toggleNavbarCollapse}
+            >
+              <span className='navbar-toggler-bar bar1' />
+              <span className='navbar-toggler-bar bar2' />
+              <span className='navbar-toggler-bar bar3' />
+            </button>
+          </div>
+          <Collapse
+            className='justify-content-end'
+            navbar
+            isOpen={navbarCollapse}
           >
-            Carhbetna
-          </NavbarBrand>
-          <button
-            aria-expanded={navbarCollapse}
-            className={classnames('navbar-toggler navbar-toggler', {
-              toggled: navbarCollapse
-            })}
-            onClick={toggleNavbarCollapse}
-          >
-            <span className='navbar-toggler-bar bar1' />
-            <span className='navbar-toggler-bar bar2' />
-            <span className='navbar-toggler-bar bar3' />
-          </button>
-        </div>
-        <Collapse
-          className='justify-content-end'
-          navbar
-          isOpen={navbarCollapse}
-        >
-          <Nav navbar>
-            <NavItem>
-              <NavLink
-                href='https://demos.creative-tim.com/paper-kit-react/#/documentation?ref=pkr-index-navbar'
-                target='_blank'
-              >
-                <i className='nc-icon' /> inscription
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <Button
-                className='btn-round'
-                color='danger'
-                href='#pablo'
-                target='_blank'
-              >
-                connexion
-              </Button>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Container>
-    </Navbar>
+            <Nav navbar>
+              <NavItem>
+                <NavLink>
+                  <i className='nc-icon' /> inscription
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <Button
+                  className='btn-round'
+                  color='danger'
+                  onClick={() => setloginModal(true)}
+                >
+                  connexion
+                </Button>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Container>
+      </Navbar>
+
+      <SignInModal isOpen={loginModal} toggle={() => setloginModal(false)} />
+    </>
   );
 }
 
