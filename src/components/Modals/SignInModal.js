@@ -1,8 +1,13 @@
 import React from 'react';
 // reactstrap components
 import { Modal, FormGroup, Input, Button } from 'reactstrap';
+// redux
+import { connect, useSelector } from 'react-redux';
+import { loginUser } from '../../js/actions/auth';
+// react-router
+import { Redirect } from 'react-router-dom';
 
-const SignInModal = ({ isOpen, toggle }) => {
+const SignInModal = ({ isOpen, toggle, loginUser }) => {
   const [userCred, setuserCred] = React.useState({
     mail: '',
     password: ''
@@ -11,7 +16,15 @@ const SignInModal = ({ isOpen, toggle }) => {
   const onChangeHandler = e => {
     setuserCred({ ...userCred, [e.target.name]: e.target.value });
   };
-  return (
+  const isAuth = useSelector(state => state.auth.isAuth);
+
+  const logUser = () => {
+    loginUser(userCred);
+  };
+
+  return isAuth ? (
+    <Redirect to='/' />
+  ) : (
     <Modal isOpen={isOpen} modalClassName='modal-register'>
       <div className='modal-header no-border-header text-center'>
         <button
@@ -48,14 +61,14 @@ const SignInModal = ({ isOpen, toggle }) => {
             onChange={onChangeHandler}
           />
         </FormGroup>
-        <Button block className='btn-round' color='default'>
+        <Button block className='btn-round' color='default' onClick={logUser}>
           S'identifier
         </Button>
       </div>
       <div className='modal-footer no-border-footer'>
         <span className='text-muted text-center'>
           À la recherche{' '}
-          <a href='#pablo' onClick={e => e.preventDefault()}>
+          <a href='/register' onClick={e => e.preventDefault()}>
             créer un compte
           </a>
           ?
@@ -65,4 +78,7 @@ const SignInModal = ({ isOpen, toggle }) => {
   );
 };
 
-export default SignInModal;
+export default connect(
+  null,
+  { loginUser }
+)(SignInModal);

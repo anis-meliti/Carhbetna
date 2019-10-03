@@ -85,6 +85,10 @@ function IndexNavbar({ logout, clearProfile }) {
     <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
       <Nav navbar>
         <NavItem>
+          <i className='nc-icon' />
+          {user.name}
+        </NavItem>
+        <NavItem>
           <Button
             className='btn-round'
             color='danger'
@@ -99,7 +103,7 @@ function IndexNavbar({ logout, clearProfile }) {
       </Nav>
     </Collapse>
   );
-  return !loading ? (
+  return loading ? (
     <Spinner color='primary' />
   ) : (
     <>

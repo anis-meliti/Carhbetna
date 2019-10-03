@@ -5,7 +5,8 @@ import {
   REGISTER_FAIL,
   USER_LOADED,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  LOGIN_FAIL
 } from '../constants/actions-types';
 
 //USER LOADER
@@ -20,6 +21,9 @@ export const loadUser = () => async dispatch => {
     });
   } catch (error) {
     console.error(error.msg);
+    dispatch({
+      type: LOGIN_FAIL
+    });
   }
 };
 
