@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
+    "moment": "^2.24.0",
     "react": "^16.10.1",
+    "react-bootstrap-switch": "^15.5.3",
+    "react-datetime": "^2.16.3",
     "react-dom": "^16.10.1",
-    "react-scripts": "3.2.0"
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "reactstrap": "^8.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
