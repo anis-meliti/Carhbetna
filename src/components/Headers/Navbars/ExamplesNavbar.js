@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
 // redux
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { logout } from '../../../js/actions/auth';
 import { clearProfile } from '../../../js/actions/profile';
 // reactstrap components
@@ -48,6 +48,32 @@ function ExamplesNavbar({ logout, clearProfile }) {
       window.removeEventListener('scroll', updateNavbarColor);
     };
   });
+  const isAuth = useSelector(state => state.auth.isAuth);
+
+  const authNavbar = (
+    <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
+      <Nav navbar>
+        <NavItem>
+          <NavLink href='/profile'>
+            <i className='nc-icon' />
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <Button
+            className='btn-round'
+            color='danger'
+            onClick={() => {
+              logout();
+              clearProfile();
+            }}
+          >
+            Se déconnecter
+          </Button>
+        </NavItem>
+      </Nav>
+    </Collapse>
+  );
+
   return (
     <Navbar
       className={classnames('fixed-top', navbarColor)}
@@ -82,21 +108,7 @@ function ExamplesNavbar({ logout, clearProfile }) {
           isOpen={navbarCollapse}
         >
           <Nav navbar>
-            <NavItem>
-              <NavLink>
-                <Button
-                  className='btn-round'
-                  color='danger'
-                  onClick={() => {
-                    logout();
-                    clearProfile();
-                  }}
-                >
-                  Se déconnecter
-                </Button>
-              </NavLink>
-            </NavItem>
-
+            {isAuth && authNavbar}
             <NavItem>
               <NavLink
                 data-placement='bottom'

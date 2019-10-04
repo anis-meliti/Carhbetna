@@ -20,8 +20,12 @@ import {
 import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
 import ProfilePageHeader from '../components/Headers/ProfilePageHeader.js';
 import DemoFooter from '../components/Footers/Footer.js';
+// redux
+import { connect, useSelector } from 'react-redux';
+import { getProfile } from '../js/actions/profile';
+import store from '../js/store/index';
 
-function ProfilePage() {
+function ProfilePage({ getProfile }) {
   const [activeTab, setActiveTab] = React.useState('1');
 
   const toggle = tab => {
@@ -36,7 +40,15 @@ function ProfilePage() {
     return function cleanup() {
       document.body.classList.remove('landing-page');
     };
-  });
+  }, []);
+  let res;
+  async function loadProfile() {
+    res = await store.dispatch(getProfile());
+  }
+  console.log('TCL: loadProfile -> res', res);
+  const loading = useSelector(state => state.profile.loading);
+  console.log('TCL: ProfilePage -> loading', loading);
+
   return (
     <>
       <ExamplesNavbar />
@@ -178,4 +190,7 @@ function ProfilePage() {
   );
 }
 
-export default ProfilePage;
+export default connect(
+  null,
+  { getProfile }
+)(ProfilePage);

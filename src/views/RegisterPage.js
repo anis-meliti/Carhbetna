@@ -7,11 +7,13 @@ import { Button, Card, Form, Input, Container, Row, Col } from 'reactstrap';
 import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
 // redux func
 import { register } from '../js/actions/auth';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 function RegisterPage({ register }) {
   const [userInfo, setuserCred] = React.useState({
-    fullName: '',
+    name: '',
+    lastname: '',
     mail: '',
     password: '',
     password2: ''
@@ -31,7 +33,10 @@ function RegisterPage({ register }) {
       document.body.classList.remove('register-page');
     };
   });
-  return (
+  const isAuth = useSelector(state => state.auth.isAuth);
+  return isAuth ? (
+    <Redirect to='/profile' />
+  ) : (
     <>
       <ExamplesNavbar />
       <div
@@ -48,11 +53,18 @@ function RegisterPage({ register }) {
               <Card className='card-register ml-auto mr-auto'>
                 <h3 className='title mx-auto'>Bienvenu</h3>
                 <Form className='register-form'>
-                  <label>Nom complet</label>
+                  <label>Nom</label>
+                  <Input
+                    placeholder='Nom'
+                    type='text'
+                    name='name'
+                    onChange={onChangeHandler}
+                  />
+                  <label>Prénom</label>
                   <Input
                     placeholder='Nom complet'
                     type='text'
-                    name='fullName'
+                    name='lastName'
                     onChange={onChangeHandler}
                   />
                   <label>Email</label>
