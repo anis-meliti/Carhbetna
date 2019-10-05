@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // reactstrap components
 import {
@@ -13,7 +13,8 @@ import {
   TabPane,
   Container,
   Row,
-  Col
+  Col,
+  Spinner
 } from 'reactstrap';
 
 // core components
@@ -22,10 +23,8 @@ import ProfilePageHeader from '../components/Headers/ProfilePageHeader.js';
 import DemoFooter from '../components/Footers/Footer.js';
 // redux
 import { connect, useSelector } from 'react-redux';
-import { getProfile } from '../js/actions/profile';
-import store from '../js/store/index';
 
-function ProfilePage({ getProfile }) {
+function ProfilePage() {
   const [activeTab, setActiveTab] = React.useState('1');
 
   const toggle = tab => {
@@ -35,21 +34,26 @@ function ProfilePage({ getProfile }) {
   };
 
   document.documentElement.classList.remove('nav-open');
-  React.useEffect(() => {
+
+  useEffect(() => {
     document.body.classList.add('landing-page');
     return function cleanup() {
       document.body.classList.remove('landing-page');
     };
   }, []);
-  let res;
-  async function loadProfile() {
-    res = await store.dispatch(getProfile());
-  }
-  console.log('TCL: loadProfile -> res', res);
   const loading = useSelector(state => state.profile.loading);
-  console.log('TCL: ProfilePage -> loading', loading);
-
-  return (
+  const profile = useSelector(state => state.profile.profile);
+  const user = useSelector(state => state.auth.user);
+  const { name, lastName, mail, avatar } = user;
+  const { miniBio, numTel, birthDate, driverLicence, gender } = profile;
+  return loading ? (
+    <Spinner
+      color='primary'
+      style={{ width: '3rem', height: '3rem', display: 'flex' }}
+      type='grow'
+      className='mx-auto  my-auto'
+    />
+  ) : (
     <>
       <ExamplesNavbar />
       <ProfilePageHeader />
@@ -60,24 +64,22 @@ function ProfilePage({ getProfile }) {
               <img
                 alt='...'
                 className='img-circle img-no-padding img-responsive'
-                src={require('../assets/img/faces/joe-gardner-2.jpg')}
+                src={avatar}
               />
             </div>
             <div className='name'>
               <h4 className='title'>
-                Jane Faker <br />
+                {name}
+                {'  '}
+                {lastName} <br />
               </h4>
-              <h6 className='description'>Music Producer</h6>
+              <h6 className='description'>{numTel}</h6>
+              <h6 className='description'>{mail}</h6>
             </div>
           </div>
           <Row>
             <Col className='ml-auto mr-auto text-center' md='6'>
-              <p>
-                An artist of considerable range, Jane Faker — the name taken by
-                Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                and records all of his own music, giving it a warm, intimate
-                feel with a solid groove structure.
-              </p>
+              <p>{miniBio}</p>
               <br />
               <Button className='btn-round' color='default' outline>
                 <i className='fa fa-cog' /> Settings
@@ -95,7 +97,7 @@ function ProfilePage({ getProfile }) {
                       toggle('1');
                     }}
                   >
-                    Follows
+                    Préférences
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -105,7 +107,7 @@ function ProfilePage({ getProfile }) {
                       toggle('2');
                     }}
                   >
-                    Following
+                    Voiture
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -116,7 +118,7 @@ function ProfilePage({ getProfile }) {
             <TabPane tabId='1' id='follows'>
               <Row>
                 <Col className='ml-auto mr-auto' md='6'>
-                  <ul className='list-unstyled follows'>
+                  {/* <ul className='list-unstyled follows'>
                     <li>
                       <Row>
                         <Col className='ml-auto mr-auto' lg='2' md='4' xs='4'>
@@ -172,14 +174,14 @@ function ProfilePage({ getProfile }) {
                         </Col>
                       </Row>
                     </li>
-                  </ul>
+                  </ul> */}
                 </Col>
               </Row>
             </TabPane>
             <TabPane className='text-center' tabId='2' id='following'>
               <h3 className='text-muted'>Not following anyone yet :(</h3>
               <Button className='btn-round' color='warning'>
-                Find artists
+                Trajet
               </Button>
             </TabPane>
           </TabContent>
@@ -190,7 +192,8 @@ function ProfilePage({ getProfile }) {
   );
 }
 
-export default connect(
-  null,
-  { getProfile }
-)(ProfilePage);
+// export default connect(
+//   null,
+//   { getProfile }
+// )(ProfilePage);
+export default ProfilePage;

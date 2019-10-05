@@ -13,3 +13,4 @@ export const SET_PROFILE = 'SET_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const ADD_PREFERENCE = 'ADD_PREFERENCE';
 export const GET_PREFERENCE = 'GET_PREFERENCE';
+export const PROFILE_FAIL = 'PROFILE_FAIL';

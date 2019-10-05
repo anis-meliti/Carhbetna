@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, createRef } from 'react';
 
 // reactstrap components
 
 // core components
 
 function ProfilePageHeader() {
-  let pageHeader = React.createRef();
+  let pageHeader = createRef();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (window.innerWidth < 991) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffects } from 'react';
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col } from 'reactstrap';
@@ -19,7 +19,6 @@ function RegisterPage({ register }) {
     password2: ''
   });
   const addUser = () => {
-    // register({ name, lastName, mail, password, avatar });
     register(userInfo);
   };
   const onChangeHandler = e => {
@@ -27,7 +26,7 @@ function RegisterPage({ register }) {
     console.log('TCL: RegisterPage -> userInfo', userInfo);
   };
   document.documentElement.classList.remove('nav-open');
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.classList.add('register-page');
     return function cleanup() {
       document.body.classList.remove('register-page');

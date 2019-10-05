@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
 // react router
@@ -31,7 +31,7 @@ function IndexNavbar({ logout, clearProfile }) {
     document.documentElement.classList.toggle('nav-open');
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 299 ||
@@ -106,7 +106,7 @@ function IndexNavbar({ logout, clearProfile }) {
     </Collapse>
   );
   return loading ? (
-    <Spinner color='primary' />
+    <Spinner color='primary ' />
   ) : (
     <>
       <Navbar className={classnames('fixed-top', navbarColor)} expand='lg'>

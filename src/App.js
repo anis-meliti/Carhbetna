@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // react router
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // components && views
 import Index from './views/Index';
 import RegisterPage from './views/RegisterPage';
 import ProfilePage from './views/ProfilePage';
+import PrivateRoute from './components/Routing/PrivateRoute';
 // redux
 import { useSelector } from 'react-redux';
 import store from './js/store/index';
 import { loadUser } from './js/actions/auth';
+import { getProfile } from './js/actions/profile';
 // reactstrap components
 import { Spinner } from 'reactstrap';
 // setauth
@@ -20,8 +22,9 @@ if (localStorage.token) {
 
 function App() {
   const loading = useSelector(state => state.auth.isLoading);
-  React.useEffect(() => {
+  useEffect(() => {
     store.dispatch(loadUser());
+    store.dispatch(getProfile());
   }, []);
   return loading ? (
     <Spinner color='primary' />

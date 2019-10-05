@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
@@ -27,7 +27,7 @@ function ExamplesNavbar({ logout, clearProfile }) {
     document.documentElement.classList.toggle('nav-open');
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 299 ||
