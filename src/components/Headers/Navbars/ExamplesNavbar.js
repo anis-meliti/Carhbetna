@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
 // redux
-import { connect, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../../js/actions/auth';
 import { clearProfile } from '../../../js/actions/profile';
 // reactstrap components
@@ -18,9 +18,9 @@ import {
   Button
 } from 'reactstrap';
 
-function ExamplesNavbar({ logout, clearProfile }) {
-  const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
-  const [navbarCollapse, setNavbarCollapse] = React.useState(false);
+function ExamplesNavbar() {
+  const [navbarColor, setNavbarColor] = useState('navbar-transparent');
+  const [navbarCollapse, setNavbarCollapse] = useState(false);
 
   const toggleNavbarCollapse = () => {
     setNavbarCollapse(!navbarCollapse);
@@ -49,7 +49,7 @@ function ExamplesNavbar({ logout, clearProfile }) {
     };
   });
   const isAuth = useSelector(state => state.auth.isAuth);
-
+  const dispatch = useDispatch();
   const authNavbar = (
     <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
       <Nav navbar>
@@ -63,8 +63,8 @@ function ExamplesNavbar({ logout, clearProfile }) {
             className='btn-round'
             color='danger'
             onClick={() => {
-              logout();
-              clearProfile();
+              dispatch(logout());
+              dispatch(clearProfile());
             }}
           >
             Se déconnecter
@@ -149,7 +149,4 @@ function ExamplesNavbar({ logout, clearProfile }) {
   );
 }
 
-export default connect(
-  null,
-  { logout, clearProfile }
-)(ExamplesNavbar);
+export default ExamplesNavbar;

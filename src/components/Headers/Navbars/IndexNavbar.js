@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
 // react router
 import { Link } from 'react-router-dom';
 // redux
-import { useSelector, connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../../js/actions/auth';
 import { clearProfile } from '../../../js/actions/profile';
 // reactstrap components
@@ -22,9 +22,9 @@ import {
 // My Components
 import SignInModal from '../../Modals/SignInModal';
 
-function IndexNavbar({ logout, clearProfile }) {
-  const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
-  const [navbarCollapse, setNavbarCollapse] = React.useState(false);
+function IndexNavbar() {
+  const [navbarColor, setNavbarColor] = useState('navbar-transparent');
+  const [navbarCollapse, setNavbarCollapse] = useState(false);
 
   const toggleNavbarCollapse = () => {
     setNavbarCollapse(!navbarCollapse);
@@ -53,11 +53,13 @@ function IndexNavbar({ logout, clearProfile }) {
     };
   });
   // the modal set
-  const [loginModal, setloginModal] = React.useState(false);
+  const [loginModal, setloginModal] = useState(false);
   // loading user
   const isAuth = useSelector(state => state.auth.isAuth);
   const user = useSelector(state => state.auth.user);
   const loading = useSelector(state => state.auth.loading);
+  const dispatch = useDispatch();
+
   const visitorNavbar = (
     <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
       <Nav navbar>
@@ -95,8 +97,8 @@ function IndexNavbar({ logout, clearProfile }) {
             className='btn-round'
             color='danger'
             onClick={() => {
-              logout();
-              clearProfile();
+              dispatch(logout());
+              dispatch(clearProfile());
             }}
           >
             Se déconnecter
@@ -140,7 +142,4 @@ function IndexNavbar({ logout, clearProfile }) {
   );
 }
 
-export default connect(
-  null,
-  { logout, clearProfile }
-)(IndexNavbar);
+export default IndexNavbar;

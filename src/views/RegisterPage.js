@@ -1,4 +1,4 @@
-import React, { useEffects } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col } from 'reactstrap';
@@ -7,19 +7,20 @@ import { Button, Card, Form, Input, Container, Row, Col } from 'reactstrap';
 import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
 // redux func
 import { register } from '../js/actions/auth';
-import { connect, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-function RegisterPage({ register }) {
-  const [userInfo, setuserCred] = React.useState({
+function RegisterPage() {
+  const [userInfo, setuserCred] = useState({
     name: '',
     lastname: '',
     mail: '',
     password: '',
     password2: ''
   });
+  const dispatch = useDispatch();
   const addUser = () => {
-    register(userInfo);
+    dispatch(register(userInfo));
   };
   const onChangeHandler = e => {
     setuserCred({ ...userInfo, [e.target.name]: e.target.value });
@@ -111,7 +112,4 @@ function RegisterPage({ register }) {
   );
 }
 
-export default connect(
-  null,
-  { register }
-)(RegisterPage);
+export default RegisterPage;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // reactstrap components
 import {
@@ -25,7 +25,7 @@ import DemoFooter from '../components/Footers/Footer.js';
 import { connect, useSelector } from 'react-redux';
 
 function ProfilePage() {
-  const [activeTab, setActiveTab] = React.useState('1');
+  const [activeTab, setActiveTab] = useState('1');
 
   const toggle = tab => {
     if (activeTab !== tab) {
@@ -118,7 +118,7 @@ function ProfilePage() {
             <TabPane tabId='1' id='follows'>
               <Row>
                 <Col className='ml-auto mr-auto' md='6'>
-                  {/* <ul className='list-unstyled follows'>
+                  <ul className='list-unstyled follows'>
                     <li>
                       <Row>
                         <Col className='ml-auto mr-auto' lg='2' md='4' xs='4'>
@@ -174,7 +174,7 @@ function ProfilePage() {
                         </Col>
                       </Row>
                     </li>
-                  </ul> */}
+                  </ul>
                 </Col>
               </Row>
             </TabPane>
@@ -192,8 +192,4 @@ function ProfilePage() {
   );
 }
 
-// export default connect(
-//   null,
-//   { getProfile }
-// )(ProfilePage);
 export default ProfilePage;
