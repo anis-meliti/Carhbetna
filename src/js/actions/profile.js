@@ -20,7 +20,19 @@ export const getProfile = () => async dispatch => {
 };
 // Update / create a profile
 export const setProfile = (
-  { numTel, birthDate, gender, driverLicence, miniBio },
+  {
+    numTel,
+    birthDate,
+    gender,
+    driverLicence,
+    miniBio,
+    discussion,
+    smoke,
+    music,
+    ponctuality,
+    car_modele,
+    car_plateNum
+  },
   token
 ) => async dispatch => {
   const config = {
@@ -34,7 +46,13 @@ export const setProfile = (
     birthDate,
     gender,
     driverLicence,
-    miniBio
+    miniBio,
+    discussion,
+    smoke,
+    music,
+    ponctuality,
+    car_modele,
+    car_plateNum
   });
   try {
     const res = await axios.post('/profile', body, config);

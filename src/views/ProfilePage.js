@@ -45,10 +45,20 @@ function ProfilePage() {
   const loading = useSelector(state => state.profile.loading);
   const profile = useSelector(state => state.profile.profile);
   const user = useSelector(state => state.auth.user);
-  const preferences = useSelector(state => state.preference.preference);
-  const { smoke, music, discussion } = preferences;
   const { name, lastName, mail, avatar } = user;
-  const { miniBio, numTel, birthDate, driverLicence, gender } = profile;
+  const {
+    miniBio,
+    numTel,
+    birthDate,
+    driverLicence,
+    gender,
+    smoke,
+    music,
+    discussion,
+    ponctuality,
+    car_modele,
+    car_plateNum
+  } = profile;
   return loading ? (
     <Spinner
       color='primary'

@@ -10,7 +10,13 @@ const initialState = {
     numTel: '',
     miniBio: '',
     gender: '',
-    driverLicence: ''
+    driverLicence: '',
+    discussion: '',
+    smoke: '',
+    ponctuality: '',
+    music: '',
+    car_modele: '',
+    car_plateNum: ''
   },
   loading: true
 };
@@ -34,7 +40,13 @@ export default (state = initialState, action) => {
           numTel: '',
           miniBio: '',
           gender: '',
-          driverLicence: ''
+          driverLicence: '',
+          discussion: '',
+          smoke: '',
+          ponctuality: '',
+          music: '',
+          car_modele: '',
+          car_plateNum: ''
         },
         loading: false
       };
