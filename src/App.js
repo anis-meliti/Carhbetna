@@ -5,12 +5,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Index from './views/Index';
 import RegisterPage from './views/RegisterPage';
 import ProfilePage from './views/ProfilePage';
-import PrivateRoute from './components/Routing/PrivateRoute';
+// import PrivateRoute from './components/Routing/PrivateRoute';
 // redux
 import { useSelector } from 'react-redux';
 import store from './js/store/index';
 import { loadUser } from './js/actions/auth';
 import { getProfile } from './js/actions/profile';
+import { getPreference } from './js/actions/preference';
 // reactstrap components
 import { Spinner } from 'reactstrap';
 // setauth
@@ -25,6 +26,7 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(getProfile());
+    store.dispatch(getPreference());
   }, []);
   return loading ? (
     <Spinner color='primary' />

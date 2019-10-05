@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { GET_PREFERENCE, ADD_PREFERENCE } from '../constants/actions-types';
+import {
+  GET_PREFERENCE,
+  ADD_PREFERENCE,
+  CLEAR_PREFERENCE
+} from '../constants/actions-types';
 
 // Get the current user preference
 
@@ -44,6 +48,6 @@ export const setPreference = (
 };
 
 //Logout
-export const clearProfile = () => dispatch => {
-  dispatch({ type: CLEAR_PROFILE });
+export const clearPreference = () => dispatch => {
+  dispatch({ type: CLEAR_PREFERENCE });
 };

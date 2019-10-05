@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // nodejs library that concatenates strings
 import classnames from 'classnames';
-// react router
-import { Link } from 'react-router-dom';
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../../js/actions/auth';
@@ -64,12 +62,10 @@ function IndexNavbar() {
     <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
       <Nav navbar>
         <NavItem>
-          <Link to='/register'>
-            <NavLink>
-              <i className='nc-icon' />
-              inscription
-            </NavLink>
-          </Link>
+          <NavLink href='/register'>
+            <i className='nc-icon' />
+            inscription
+          </NavLink>
         </NavItem>
         <NavItem>
           <Button

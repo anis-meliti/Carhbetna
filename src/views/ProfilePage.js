@@ -17,12 +17,13 @@ import {
   Spinner
 } from 'reactstrap';
 
+// redux
+import { useSelector } from 'react-redux';
+
 // core components
 import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
 import ProfilePageHeader from '../components/Headers/ProfilePageHeader.js';
 import DemoFooter from '../components/Footers/Footer.js';
-// redux
-import { connect, useSelector } from 'react-redux';
 
 function ProfilePage() {
   const [activeTab, setActiveTab] = useState('1');
@@ -44,6 +45,8 @@ function ProfilePage() {
   const loading = useSelector(state => state.profile.loading);
   const profile = useSelector(state => state.profile.profile);
   const user = useSelector(state => state.auth.user);
+  const preferences = useSelector(state => state.preference.preference);
+  const { smoke, music, discussion } = preferences;
   const { name, lastName, mail, avatar } = user;
   const { miniBio, numTel, birthDate, driverLicence, gender } = profile;
   return loading ? (
@@ -74,7 +77,7 @@ function ProfilePage() {
                 {lastName} <br />
               </h4>
               <h6 className='description'>{numTel}</h6>
-              <h6 className='description'>{mail}</h6>
+              <h6>{mail}</h6>
             </div>
           </div>
           <Row>
@@ -97,7 +100,7 @@ function ProfilePage() {
                       toggle('1');
                     }}
                   >
-                    Préférences
+                    Information personnel
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -105,6 +108,16 @@ function ProfilePage() {
                     className={activeTab === '2' ? 'active' : ''}
                     onClick={() => {
                       toggle('2');
+                    }}
+                  >
+                    Préférences
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={activeTab === '3' ? 'active' : ''}
+                    onClick={() => {
+                      toggle('3');
                     }}
                   >
                     Voiture
@@ -121,56 +134,74 @@ function ProfilePage() {
                   <ul className='list-unstyled follows'>
                     <li>
                       <Row>
-                        <Col className='ml-auto mr-auto' lg='2' md='4' xs='4'>
-                          <img
-                            alt='...'
-                            className='img-circle img-no-padding img-responsive'
-                            src={require('../assets/img/faces/clem-onojeghuo-2.jpg')}
-                          />
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Genre:</h6>
                         </Col>
-                        <Col className='ml-auto mr-auto' lg='7' md='4' xs='4'>
-                          <h6>
-                            Flume <br />
-                            <small>Musical Producer</small>
-                          </h6>
-                        </Col>
-                        <Col className='ml-auto mr-auto' lg='3' md='4' xs='4'>
-                          <FormGroup check>
-                            <Label check>
-                              <Input
-                                defaultChecked
-                                defaultValue=''
-                                type='checkbox'
-                              />
-                              <span className='form-check-sign' />
-                            </Label>
-                          </FormGroup>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{gender}</small>
                         </Col>
                       </Row>
                     </li>
                     <hr />
                     <li>
                       <Row>
-                        <Col className='mx-auto' lg='2' md='4' xs='4'>
-                          <img
-                            alt='...'
-                            className='img-circle img-no-padding img-responsive'
-                            src={require('../assets/img/faces/ayo-ogunseinde-2.jpg')}
-                          />
-                        </Col>
                         <Col lg='7' md='4' xs='4'>
-                          <h6>
-                            Banks <br />
-                            <small>Singer</small>
-                          </h6>
+                          <h6>Date de naissance:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          <FormGroup check>
-                            <Label check>
-                              <Input defaultValue='' type='checkbox' />
-                              <span className='form-check-sign' />
-                            </Label>
-                          </FormGroup>
+                          <small>{birthDate}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                    <hr />
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Permis de conduire depuis:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{driverLicence}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                    <hr />
+                  </ul>
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId='2' id='follows'>
+              <Row>
+                <Col className='ml-auto mr-auto' md='6'>
+                  <ul className='list-unstyled follows'>
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Ciguarettes:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{smoke}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                    <hr />
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Musique:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{music}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                    <hr />
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Discussion:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{discussion}</small>
                         </Col>
                       </Row>
                     </li>
@@ -178,11 +209,45 @@ function ProfilePage() {
                 </Col>
               </Row>
             </TabPane>
-            <TabPane className='text-center' tabId='2' id='following'>
-              <h3 className='text-muted'>Not following anyone yet :(</h3>
-              <Button className='btn-round' color='warning'>
-                Trajet
-              </Button>
+            <TabPane className='text-center' tabId='3' id='following'>
+              <Row>
+                <Col className='ml-auto mr-auto' md='6'>
+                  <ul className='list-unstyled follows'>
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Ciguarettes:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{smoke}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                    <hr />
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Musique:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{music}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                    <hr />
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Discussion:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{discussion}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                  </ul>
+                </Col>
+              </Row>
             </TabPane>
           </TabContent>
         </Container>
