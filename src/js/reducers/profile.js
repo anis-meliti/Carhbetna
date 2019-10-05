@@ -1,7 +1,8 @@
 import {
   GET_PROFILE,
   CLEAR_PROFILE,
-  PROFILE_FAIL
+  PROFILE_FAIL,
+  SET_PROFILE
 } from '../constants/actions-types';
 
 const initialState = {
@@ -50,7 +51,12 @@ export default (state = initialState, action) => {
         },
         loading: false
       };
-
+    case SET_PROFILE:
+      return {
+        ...state,
+        profile: payload,
+        loading: false
+      };
     default:
       return state;
   }

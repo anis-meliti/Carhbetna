@@ -215,6 +215,18 @@ function ProfilePage() {
                         </Col>
                       </Row>
                     </li>
+                    <hr />
+                    <li>
+                      <Row>
+                        <Col lg='7' md='4' xs='4'>
+                          <h6>Ponctualité:</h6>
+                        </Col>
+                        <Col lg='3' md='4' xs='4'>
+                          <small>{ponctuality}</small>
+                        </Col>
+                      </Row>
+                    </li>
+                    <hr />
                   </ul>
                 </Col>
               </Row>
@@ -226,10 +238,10 @@ function ProfilePage() {
                     <li>
                       <Row>
                         <Col lg='7' md='4' xs='4'>
-                          <h6>Ciguarettes:</h6>
+                          <h6>Modele :</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          <small>{smoke}</small>
+                          <small>{car_modele}</small>
                         </Col>
                       </Row>
                     </li>
@@ -237,24 +249,14 @@ function ProfilePage() {
                     <li>
                       <Row>
                         <Col lg='7' md='4' xs='4'>
-                          <h6>Musique:</h6>
+                          <h6>N° de plaque:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          <small>{music}</small>
+                          <small>{car_plateNum}</small>
                         </Col>
                       </Row>
                     </li>
                     <hr />
-                    <li>
-                      <Row>
-                        <Col lg='7' md='4' xs='4'>
-                          <h6>Discussion:</h6>
-                        </Col>
-                        <Col lg='3' md='4' xs='4'>
-                          <small>{discussion}</small>
-                        </Col>
-                      </Row>
-                    </li>
                   </ul>
                 </Col>
               </Row>
