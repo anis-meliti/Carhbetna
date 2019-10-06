@@ -19,11 +19,11 @@ import {
 
 // redux
 import { useSelector } from 'react-redux';
-
+import './ProfilePage.css';
 // core components
-import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
-import ProfilePageHeader from '../components/Headers/ProfilePageHeader.js';
-import DemoFooter from '../components/Footers/Footer.js';
+import ExamplesNavbar from '../../components/Headers/Navbars/ExamplesNavbar';
+import ProfilePageHeader from '../../components/Headers/ProfilePageHeader.js';
+import DemoFooter from '../../components/Footers/Footer.js';
 
 function ProfilePage() {
   const [activeTab, setActiveTab] = useState('1');
@@ -59,6 +59,7 @@ function ProfilePage() {
     car_modele,
     car_plateNum
   } = profile;
+  const [smokeField, setsmokeField] = useState(false);
   return loading ? (
     <Spinner
       color='primary'
@@ -94,8 +95,13 @@ function ProfilePage() {
             <Col className='ml-auto mr-auto text-center' md='6'>
               <p>{miniBio}</p>
               <br />
-              <Button className='btn-round' color='default' outline>
-                <i className='fa fa-cog' /> Settings
+              <Button
+                className='btn-round'
+                color='default'
+                outline
+                // onClick={}
+              >
+                <i className='fa fa-cog' /> Paramètres
               </Button>
             </Col>
           </Row>
@@ -189,7 +195,31 @@ function ProfilePage() {
                           <h6>Ciguarettes:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          <small>{smoke}</small>
+                          {!smokeField ? (
+                            <small> {smoke}</small>
+                          ) : (
+                            <div>
+                              <Input
+                                placeholder='Prénom'
+                                type='text'
+                                name='lastName'
+                                // onChange={onChangeHandler}
+                                defaultValue={smoke}
+                              />
+                            </div>
+                          )}
+                        </Col>
+                        <Col>
+                          <img
+                            name='create'
+                            className='icon'
+                            src={
+                              smokeField
+                                ? require('../../assets/icon/_ionicons_svg_md-done-all.svg')
+                                : require('../../assets/icon/_ionicons_svg_md-create.svg')
+                            }
+                            onClick={() => setsmokeField(!smokeField)}
+                          />
                         </Col>
                       </Row>
                     </li>

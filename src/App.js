@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // components && views
 import Index from './views/Index';
 import RegisterPage from './views/RegisterPage';
-import ProfilePage from './views/ProfilePage';
+import ProfilePage from './views/ProfilePage/ProfilePage';
 // import PrivateRoute from './components/Routing/PrivateRoute';
 // redux
 import { useSelector } from 'react-redux';

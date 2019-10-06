@@ -62,7 +62,7 @@ function RegisterPage() {
                   />
                   <label>Prénom</label>
                   <Input
-                    placeholder='Nom complet'
+                    placeholder='Prénom'
                     type='text'
                     name='lastName'
                     onChange={onChangeHandler}
