@@ -60,18 +60,6 @@ function ProfilePage() {
     car_plateNum
   } = profile;
 
-  const [editableField, seteditableField] = useState({
-    birthDateField: false,
-    driverLicenceField: false,
-    genderField: false,
-    smokeField: false,
-    musicField: false,
-    discussionField: false,
-    ponctualityField: false,
-    car_modeleField: false,
-    car_plateNumField: false
-  });
-
   return loading ? (
     <Spinner
       color='primary'
@@ -111,7 +99,7 @@ function ProfilePage() {
                 className='btn-round'
                 color='default'
                 outline
-                // onClick={}
+                // onClick={() => setshow(true)}
               >
                 <i className='fa fa-cog' /> Paramètres
               </Button>
@@ -207,36 +195,7 @@ function ProfilePage() {
                           <h6>Ciguarettes:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          {!editableField.smokeField ? (
-                            <small> {smoke}</small>
-                          ) : (
-                            <div>
-                              <Input
-                                placeholder='Prénom'
-                                type='text'
-                                name='lastName'
-                                // onChange={onChangeHandler}
-                                defaultValue={smoke}
-                              />
-                            </div>
-                          )}
-                        </Col>
-                        <Col>
-                          <img
-                            name='create'
-                            className='icon'
-                            src={
-                              editableField.smokeField
-                                ? require('../../assets/icon/_ionicons_svg_md-done-all.svg')
-                                : require('../../assets/icon/_ionicons_svg_md-create.svg')
-                            }
-                            onClick={() =>
-                              seteditableField({
-                                ...editableField,
-                                smokeField: !editableField.smokeField
-                              })
-                            }
-                          />
+                          <small> {smoke}</small>
                         </Col>
                       </Row>
                     </li>
@@ -247,35 +206,7 @@ function ProfilePage() {
                           <h6>Musique:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          {!editableField.musicField ? (
-                            <small> {music}</small>
-                          ) : (
-                            <div>
-                              <Input
-                                type='text'
-                                name='lastName'
-                                // onChange={onChangeHandler}
-                                defaultValue={music}
-                              />
-                            </div>
-                          )}
-                        </Col>
-                        <Col>
-                          <img
-                            name='create'
-                            className='icon'
-                            src={
-                              editableField.musicField
-                                ? require('../../assets/icon/_ionicons_svg_md-done-all.svg')
-                                : require('../../assets/icon/_ionicons_svg_md-create.svg')
-                            }
-                            onClick={() =>
-                              seteditableField({
-                                ...editableField,
-                                musicField: !editableField.musicField
-                              })
-                            }
-                          />
+                          <small>{music}</small>
                         </Col>
                       </Row>
                     </li>
@@ -286,35 +217,7 @@ function ProfilePage() {
                           <h6>Discussion:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          {!editableField.discussionField ? (
-                            <small> {discussion}</small>
-                          ) : (
-                            <div>
-                              <Input
-                                type='text'
-                                name='lastName'
-                                // onChange={onChangeHandler}
-                                defaultValue={discussion}
-                              />
-                            </div>
-                          )}
-                        </Col>
-                        <Col>
-                          <img
-                            name='create'
-                            className='icon'
-                            src={
-                              editableField.discussionField
-                                ? require('../../assets/icon/_ionicons_svg_md-done-all.svg')
-                                : require('../../assets/icon/_ionicons_svg_md-create.svg')
-                            }
-                            onClick={() =>
-                              seteditableField({
-                                ...editableField,
-                                discussionField: !editableField.discussionField
-                              })
-                            }
-                          />
+                          <small>{discussion}</small>
                         </Col>
                       </Row>
                     </li>
@@ -325,35 +228,7 @@ function ProfilePage() {
                           <h6>Ponctualité:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          {!editableField.ponctualityField ? (
-                            <small> {ponctuality}</small>
-                          ) : (
-                            <div>
-                              <Input
-                                type='text'
-                                name='lastName'
-                                // onChange={onChangeHandler}
-                                defaultValue={ponctuality}
-                              />
-                            </div>
-                          )}
-                        </Col>
-                        <Col>
-                          <img
-                            name='create'
-                            className='icon'
-                            src={
-                              editableField.ponctualityField
-                                ? require('../../assets/icon/_ionicons_svg_md-done-all.svg')
-                                : require('../../assets/icon/_ionicons_svg_md-create.svg')
-                            }
-                            onClick={() =>
-                              seteditableField({
-                                ...editableField,
-                                ponctualityField: !editableField.ponctualityField
-                              })
-                            }
-                          />
+                          <small>{ponctuality}</small>
                         </Col>
                       </Row>
                     </li>
@@ -369,38 +244,10 @@ function ProfilePage() {
                     <li>
                       <Row>
                         <Col lg='7' md='4' xs='4'>
-                          <h6>Modèle :</h6>
+                          <h6>Modele :</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          {!editableField.car_modeleField ? (
-                            <small> {car_modele}</small>
-                          ) : (
-                            <div>
-                              <Input
-                                type='text'
-                                name='lastName'
-                                // onChange={onChangeHandler}
-                                defaultValue={car_modele}
-                              />
-                            </div>
-                          )}
-                        </Col>
-                        <Col>
-                          <img
-                            name='create'
-                            className='icon'
-                            src={
-                              editableField.car_modeleField
-                                ? require('../../assets/icon/_ionicons_svg_md-done-all.svg')
-                                : require('../../assets/icon/_ionicons_svg_md-create.svg')
-                            }
-                            onClick={() =>
-                              seteditableField({
-                                ...editableField,
-                                car_modeleField: !editableField.car_modeleField
-                              })
-                            }
-                          />
+                          <small>{car_modele}</small>
                         </Col>
                       </Row>
                     </li>
@@ -411,35 +258,7 @@ function ProfilePage() {
                           <h6>N° de plaque:</h6>
                         </Col>
                         <Col lg='3' md='4' xs='4'>
-                          {!editableField.car_plateNumField ? (
-                            <small> {car_plateNum}</small>
-                          ) : (
-                            <div>
-                              <Input
-                                type='text'
-                                name='lastName'
-                                // onChange={onChangeHandler}
-                                defaultValue={car_plateNum}
-                              />
-                            </div>
-                          )}
-                        </Col>
-                        <Col>
-                          <img
-                            name='create'
-                            className='icon'
-                            src={
-                              editableField.car_plateNumField
-                                ? require('../../assets/icon/_ionicons_svg_md-done-all.svg')
-                                : require('../../assets/icon/_ionicons_svg_md-create.svg')
-                            }
-                            onClick={() =>
-                              seteditableField({
-                                ...editableField,
-                                car_plateNumField: !editableField.car_plateNumField
-                              })
-                            }
-                          />
+                          <small>{car_plateNum}</small>
                         </Col>
                       </Row>
                     </li>
