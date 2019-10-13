@@ -1,10 +1,6 @@
 import React, { useEffect, createRef } from 'react';
 
-// reactstrap components
-
-// core components
-
-function ProfilePageHeader() {
+const ProfilePageHeader = () => {
   let pageHeader = createRef();
 
   useEffect(() => {
@@ -36,6 +32,6 @@ function ProfilePageHeader() {
       </div>
     </>
   );
-}
+};
 
 export default ProfilePageHeader;

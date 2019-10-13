@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// nodejs library that concatenates strings
 import classnames from 'classnames';
-// redux
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../../js/actions/auth';
-import { clearProfile } from '../../../js/actions/profile';
-// reactstrap components
 import {
   Button,
   Collapse,
@@ -17,10 +12,12 @@ import {
   Container,
   Spinner
 } from 'reactstrap';
-// My Components
+
+import { logout } from '../../../js/actions/auth';
+import { clearProfile } from '../../../js/actions/profile';
 import SignInModal from '../../Modals/SignInModal';
 
-function IndexNavbar() {
+const IndexNavbar = () => {
   const [navbarColor, setNavbarColor] = useState('navbar-transparent');
   const [navbarCollapse, setNavbarCollapse] = useState(false);
 
@@ -136,6 +133,6 @@ function IndexNavbar() {
       <SignInModal isOpen={loginModal} toggle={() => setloginModal(false)} />
     </>
   );
-}
+};
 
 export default IndexNavbar;

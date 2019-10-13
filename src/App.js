@@ -1,19 +1,16 @@
 import React, { useEffect } from 'react';
-// react router
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// components && views
+import { useSelector } from 'react-redux';
+import { Spinner } from 'reactstrap';
+
 import Index from './views/Index';
 import RegisterPage from './views/RegisterPage';
 import ProfilePage from './views/ProfilePage/ProfilePage';
 // import PrivateRoute from './components/Routing/PrivateRoute';
-// redux
-import { useSelector } from 'react-redux';
+
 import store from './js/store/index';
 import { loadUser } from './js/actions/auth';
 import { getProfile } from './js/actions/profile';
-// reactstrap components
-import { Spinner } from 'reactstrap';
-// setauth
 import setAuthToken from './utils/setAuthToken';
 
 if (localStorage.token) {

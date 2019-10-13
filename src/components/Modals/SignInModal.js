@@ -2,12 +2,13 @@ import React from 'react';
 // reactstrap components
 import { Modal, FormGroup, Input, Button, Spinner } from 'reactstrap';
 // redux
-import { connect, useSelector } from 'react-redux';
-import { loginUser } from '../../js/actions/auth';
+import { useSelector, useDispatch } from 'react-redux';
 // react-router
 import { Redirect } from 'react-router-dom';
+import { loginUser } from '../../js/actions/auth';
 
-const SignInModal = ({ isOpen, toggle, loginUser }) => {
+const SignInModal = ({ isOpen, toggle }) => {
+  const dispatch = useDispatch();
   const [userCred, setuserCred] = React.useState({
     mail: '',
     password: ''
@@ -20,7 +21,7 @@ const SignInModal = ({ isOpen, toggle, loginUser }) => {
   const loading = useSelector(state => state.auth.loading);
 
   const logUser = () => {
-    loginUser(userCred);
+    dispatch(loginUser(userCred));
   };
 
   return loading ? (
@@ -81,7 +82,4 @@ const SignInModal = ({ isOpen, toggle, loginUser }) => {
   );
 };
 
-export default connect(
-  null,
-  { loginUser }
-)(SignInModal);
+export default SignInModal;

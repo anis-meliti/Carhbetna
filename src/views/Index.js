@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 
-// reactstrap components
-
-// core components
 import IndexNavbar from '../components/Headers/Navbars/IndexNavbar';
 import IndexHeader from '../components/Headers/IndexHeader';
 import Footer from '../components/Footers/Footer';

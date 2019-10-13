@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-
-// reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col } from 'reactstrap';
-
-// core components
-import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
-// redux func
-import { register } from '../js/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+
+import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
+import { register } from '../js/actions/auth';
 
 function RegisterPage() {
   const [userInfo, setuserCred] = useState({

@@ -1,11 +1,7 @@
 import React from 'react';
-
-// reactstrap components
 import { Container } from 'reactstrap';
 
-// core components
-
-function IndexHeader() {
+const IndexHeader = () => {
   return (
     <>
       <div
@@ -35,6 +31,6 @@ function IndexHeader() {
       </div>
     </>
   );
-}
+};
 
 export default IndexHeader;

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// nodejs library that concatenates strings
 import classnames from 'classnames';
-// redux
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../../js/actions/auth';
-import { clearProfile } from '../../../js/actions/profile';
-// reactstrap components
 import {
   Collapse,
   NavbarBrand,
@@ -18,7 +13,10 @@ import {
   Button
 } from 'reactstrap';
 
-function ExamplesNavbar() {
+import { logout } from '../../../js/actions/auth';
+import { clearProfile } from '../../../js/actions/profile';
+
+const ExamplesNavbar = () => {
   const [navbarColor, setNavbarColor] = useState('navbar-transparent');
   const [navbarCollapse, setNavbarCollapse] = useState(false);
 
@@ -147,6 +145,6 @@ function ExamplesNavbar() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default ExamplesNavbar;
