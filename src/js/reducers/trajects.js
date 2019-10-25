@@ -1,10 +1,7 @@
 import { POINT_LOADED, POINT_LOADED_FAILED } from '../constants/actions-types';
 
 const initialState = {
-  traject: {
-    depPoint: '',
-    arrPoint: ''
-  },
+  traject: {},
   loading: true,
   error: ''
 };

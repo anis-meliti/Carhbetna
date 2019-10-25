@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Input, Progress, Form } from 'reactstrap';
 import MapGL from 'react-map-gl';
-import { useDispatch } from 'react-redux';
-import { getPoint } from '../../js/actions/traject';
+import MapboxAutocomplete from 'react-mapbox-autocomplete';
+
+import './AddTraject.css';
 
 const AddTraject = () => {
   const [viewport, setViewport] = useState({
@@ -12,22 +13,32 @@ const AddTraject = () => {
     width: '100%',
     height: '100%'
   });
+
   const [search, setSearch] = useState({
     depPoint: '',
     arrPoint: ''
   });
-  const dispatch = useDispatch();
-  console.log('TCL: AddTraject -> search', search);
 
-  const changeHandler = e => {
+  const departurePoint = (result, lat, lng, text) => {
     setSearch({
       ...search,
-      [e.target.name]: e.target.value
+      depPoint: result
     });
   };
-  useEffect(() => {
-    dispatch(getPoint(search));
-  });
+  const suggestionSelect = (result, lat, lng, text) => {
+    setViewport({
+      ...viewport,
+      latitude: Number(lat),
+      longitude: Number(lng),
+      zoom: 10
+    });
+    setSearch({
+      ...search,
+      arrPoint: result
+    });
+
+    console.log(result, lat, lng, text);
+  };
   return (
     <Container className='section'>
       <Row>
@@ -44,20 +55,30 @@ const AddTraject = () => {
             <Col md={6}>
               <Row>
                 <label>Point de départ:</label>
-                <Input
-                  type='text'
-                  placeholder='Point de départ...'
+              </Row>
+              <Row>
+                <MapboxAutocomplete
                   name='depPoint'
-                  onChange={changeHandler}
+                  className='search-input'
+                  publicKey={process.env.REACT_APP_MAPBOX_TOKEN}
+                  inputClass='form-control search'
+                  onSuggestionSelect={departurePoint}
+                  country='tn'
+                  resetSearch={false}
                 />
               </Row>
               <Row className='mt-2'>
                 <label>Point d'arrivée':</label>
-                <Input
+              </Row>
+              <Row>
+                <MapboxAutocomplete
                   name='arrPoint'
-                  type='text'
-                  placeholder={`Point d'arrivé...`}
-                  onChange={changeHandler}
+                  className='search-input'
+                  publicKey={process.env.REACT_APP_MAPBOX_TOKEN}
+                  inputClass='form-control search'
+                  onSuggestionSelect={suggestionSelect}
+                  country='tn'
+                  resetSearch={false}
                 />
               </Row>
             </Col>
