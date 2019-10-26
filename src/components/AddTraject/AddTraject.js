@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Input, Progress, Form } from 'reactstrap';
+import { Container, Row, Col, Progress, Form } from 'reactstrap';
 import MapGL from 'react-map-gl';
 import MapboxAutocomplete from 'react-mapbox-autocomplete';
 

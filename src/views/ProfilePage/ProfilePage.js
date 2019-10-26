@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
-  Button,
   NavItem,
   NavLink,
   Nav,
@@ -18,7 +17,6 @@ import './ProfilePage.css';
 import ExamplesNavbar from '../../components/Headers/Navbars/ExamplesNavbar';
 import ProfilePageHeader from '../../components/Headers/ProfilePageHeader.js';
 import DemoFooter from '../../components/Footers/Footer.js';
-import AlterProfile from '../../components/Modals/AlterProfile';
 
 function ProfilePage() {
   const [activeTab, setActiveTab] = useState('1');
@@ -54,7 +52,6 @@ function ProfilePage() {
     car_modele,
     car_plateNum
   } = profile;
-  const [show, setshow] = useState(false);
   return loading ? (
     <Spinner
       color='primary'
@@ -89,15 +86,6 @@ function ProfilePage() {
           <Row>
             <Col className='ml-auto mr-auto text-center' md='6'>
               <p>{miniBio}</p>
-              <br />
-              <Button
-                className='btn-round'
-                color='default'
-                outline
-                onClick={() => setshow(true)}
-              >
-                <i className='fa fa-cog' /> Paramètres
-              </Button>
             </Col>
           </Row>
           <br />
@@ -264,11 +252,6 @@ function ProfilePage() {
             </TabPane>
           </TabContent>
         </Container>
-        <AlterProfile
-          isOpen={show}
-          hide={() => setshow(false)}
-          profile={profile}
-        />
       </div>
       <DemoFooter />
     </>
