@@ -4,7 +4,6 @@ import IndexNavbar from '../components/Headers/Navbars/IndexNavbar';
 import IndexHeader from '../components/Headers/IndexHeader';
 import Footer from '../components/Footers/Footer';
 import SearchTraject from '../components/SearchTraject/SearchTraject';
-import AddTraject from '../components/AddTraject/AddTraject';
 
 function Index() {
   document.documentElement.classList.remove('nav-open');
@@ -19,7 +18,6 @@ function Index() {
       <IndexNavbar />
       <IndexHeader />
       <SearchTraject />
-      <AddTraject />
       <Footer />
     </>
   );

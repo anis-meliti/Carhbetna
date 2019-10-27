@@ -107,11 +107,7 @@ const IndexNavbar = () => {
       <Navbar className={classnames('fixed-top', navbarColor)} expand='lg'>
         <Container>
           <div className='navbar-translate'>
-            <NavbarBrand
-              data-placement='bottom'
-              href='/'
-              title='Coded by Creative Tim'
-            >
+            <NavbarBrand data-placement='bottom' href='/'>
               Carhbetna
             </NavbarBrand>
             <button

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Spinner } from 'reactstrap';
 
 import Index from './views/Index';
-import RegisterPage from './views/RegisterPage';
+import RegisterPage from './views/RegisterPage/RegisterPage';
 import ProfilePage from './views/ProfilePage/ProfilePage';
 // import PrivateRoute from './components/Routing/PrivateRoute';
 
@@ -12,6 +12,7 @@ import store from './js/store/index';
 import { loadUser } from './js/actions/auth';
 import { getProfile } from './js/actions/profile';
 import setAuthToken from './utils/setAuthToken';
+import Dashboard from './views/Dashboard/Dashboard';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -31,6 +32,7 @@ function App() {
         <Route exact path='/' render={() => <Index />} />
         <Route exact path='/profile' render={() => <ProfilePage />} />
         <Route exact path='/register' render={() => <RegisterPage />} />
+        <Route path='/dashboard' render={() => <Dashboard />} />
       </Switch>
     </BrowserRouter>
   );

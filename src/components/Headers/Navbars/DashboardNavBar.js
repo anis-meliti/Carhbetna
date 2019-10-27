@@ -2,21 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../../js/actions/auth';
+import { clearProfile } from '../../../js/actions/profile';
 import {
   Collapse,
   NavbarBrand,
   Navbar,
   NavItem,
-  NavLink,
   Nav,
   Container,
   Button
 } from 'reactstrap';
 
-import { logout } from '../../../js/actions/auth';
-import { clearProfile } from '../../../js/actions/profile';
-
-const ExamplesNavbar = () => {
+const DashboardNavBar = () => {
   const [navbarColor, setNavbarColor] = useState('navbar-transparent');
   const [navbarCollapse, setNavbarCollapse] = useState(false);
 
@@ -47,15 +45,14 @@ const ExamplesNavbar = () => {
     };
   });
   const isAuth = useSelector(state => state.auth.isAuth);
+  const user = useSelector(state => state.auth.user);
+  const { avatar, name } = user;
   const dispatch = useDispatch();
+  {
+  }
   const authNavbar = (
     <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
       <Nav navbar>
-        <NavItem>
-          <NavLink href='/profile'>
-            <i className='nc-icon' />
-          </NavLink>
-        </NavItem>
         <NavItem>
           <Button
             className='btn-round'
@@ -74,15 +71,12 @@ const ExamplesNavbar = () => {
 
   return (
     <Navbar
-      className={classnames('fixed-top', navbarColor)}
+      className={classnames('fixed-top', ' dark-panel-header ')}
       color-on-scroll='300'
       expand='lg'
     >
       <Container>
         <div className='navbar-translate'>
-          <NavbarBrand data-placement='bottom' to='/' tag={Link}>
-            Carhbetna
-          </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
             className={classnames('navbar-toggler navbar-toggler', {
@@ -103,37 +97,13 @@ const ExamplesNavbar = () => {
           <Nav navbar>
             {isAuth && authNavbar}
             <NavItem>
-              <NavLink
-                data-placement='bottom'
-                href='https://twitter.com/'
-                target='_blank'
-                title='Follow us on Twitter'
-              >
-                <i className='fa fa-twitter' />
-                <p className='d-lg-none'>Twitter</p>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                data-placement='bottom'
-                href='https://www.facebook.com/'
-                target='_blank'
-                title='Like us on Facebook'
-              >
-                <i className='fa fa-facebook-square' />
-                <p className='d-lg-none'>Facebook</p>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                data-placement='bottom'
-                href='https://www.instagram.com/'
-                target='_blank'
-                title='Follow us on Instagram'
-              >
-                <i className='fa fa-instagram' />
-                <p className='d-lg-none'>Instagram</p>
-              </NavLink>
+              <div className='author'>
+                <img
+                  src={avatar}
+                  className='img-details  img-circle  img-responsive '
+                  alt='...'
+                />
+              </div>
             </NavItem>
           </Nav>
         </Collapse>
@@ -142,4 +112,4 @@ const ExamplesNavbar = () => {
   );
 };
 
-export default ExamplesNavbar;
+export default DashboardNavBar;

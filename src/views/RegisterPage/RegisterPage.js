@@ -3,8 +3,8 @@ import { Button, Card, Form, Input, Container, Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import ExamplesNavbar from '../components/Headers/Navbars/ExamplesNavbar';
-import { register } from '../js/actions/auth';
+import ExamplesNavbar from '../../components/Headers/Navbars/ExamplesNavbar';
+import { register } from '../../js/actions/auth';
 
 function RegisterPage() {
   const [userInfo, setuserCred] = useState({
@@ -39,7 +39,7 @@ function RegisterPage() {
         className='page-header'
         style={{
           backgroundImage:
-            'url(' + require('../assets/img/ilya-yakover.jpg') + ')'
+            'url(' + require('../../assets/img/ilya-yakover.jpg') + ')'
         }}
       >
         <div className='filter' />
