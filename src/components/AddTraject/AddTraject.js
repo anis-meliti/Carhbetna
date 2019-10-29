@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Progress, Form } from 'reactstrap';
+import { Card, Row, Col, CardBody, CardHeader } from 'reactstrap';
 import MapGL from 'react-map-gl';
 import MapboxAutocomplete from 'react-mapbox-autocomplete';
+import '../../assets/css/dashboard.css';
 
 import './AddTraject.css';
 
@@ -40,62 +41,58 @@ const AddTraject = () => {
     console.log(result, lat, lng, text);
   };
   return (
-    <Container className='section'>
+    <div className='content'>
       <Row>
-        <h3 className='title mx-auto'>Publier une annonce :</h3>
+        <Col md='12'>
+          <Card>
+            <CardHeader>
+              <h5 className='title'>Publier une annonce :</h5>
+            </CardHeader>
+            <CardBody>
+              <Row>
+                <Col md={6}>
+                  <Row>
+                    <MapboxAutocomplete
+                      name='depPoint'
+                      className='search-input'
+                      publicKey={process.env.REACT_APP_MAPBOX_TOKEN}
+                      inputClass='form-control search'
+                      onSuggestionSelect={departurePoint}
+                      country='tn'
+                      resetSearch={false}
+                    />
+                  </Row>
+                  <Row className='mt-2'>
+                    <label>Point d'arrivée':</label>
+                  </Row>
+                  <Row>
+                    <MapboxAutocomplete
+                      name='arrPoint'
+                      className='search-input'
+                      publicKey={process.env.REACT_APP_MAPBOX_TOKEN}
+                      inputClass='form-control search'
+                      onSuggestionSelect={suggestionSelect}
+                      country='tn'
+                      resetSearch={false}
+                    />
+                  </Row>
+                </Col>
+                <Col md={6}>
+                  <MapGL
+                    {...viewport}
+                    mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    mapStyle='mapbox://styles/ansmeliti/ck1s2bb1s1qh11cqnpb4orsmf'
+                    onViewportChange={viewport => {
+                      setViewport(viewport);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </Col>
       </Row>
-
-      <div className='progress-container progress-primary'>
-        <span className='progress-badge'>Progresse:</span>
-        <Progress max='100' value='40' barClassName='progress-bar-primary' />
-      </div>
-      <Form className='form mt-4 '>
-        <Container className='section-components'>
-          <Row>
-            <Col md={6}>
-              <Row>
-                <label>Point de départ:</label>
-              </Row>
-              <Row>
-                <MapboxAutocomplete
-                  name='depPoint'
-                  className='search-input'
-                  publicKey={process.env.REACT_APP_MAPBOX_TOKEN}
-                  inputClass='form-control search'
-                  onSuggestionSelect={departurePoint}
-                  country='tn'
-                  resetSearch={false}
-                />
-              </Row>
-              <Row className='mt-2'>
-                <label>Point d'arrivée':</label>
-              </Row>
-              <Row>
-                <MapboxAutocomplete
-                  name='arrPoint'
-                  className='search-input'
-                  publicKey={process.env.REACT_APP_MAPBOX_TOKEN}
-                  inputClass='form-control search'
-                  onSuggestionSelect={suggestionSelect}
-                  country='tn'
-                  resetSearch={false}
-                />
-              </Row>
-            </Col>
-            <Col md={6}>
-              <MapGL
-                {...viewport}
-                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                mapStyle='mapbox://styles/ansmeliti/ck1s2bb1s1qh11cqnpb4orsmf'
-                onViewportChange={viewport => {
-                  setViewport(viewport);
-                }}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </Form>
-    </Container>
+    </div>
   );
 };
 

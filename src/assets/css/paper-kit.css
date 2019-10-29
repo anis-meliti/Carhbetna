@@ -6419,7 +6419,9 @@ td.rdtYear:hover {
 
 @media screen and (max-width: 320px) {
   .index .presentation-subtitle {
-    margin-bottom: 100px; }
+    margin-bottom: 100px; 
+    overflow-x: hidden;
+  }
   .index .category.category-absolute {
     margin-top: 20px; } }
 

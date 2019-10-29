@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../../js/actions/auth';
 import { clearProfile } from '../../../js/actions/profile';
+import '../../../assets/css/dashboard.css';
 import {
   Collapse,
   NavbarBrand,
@@ -71,12 +72,14 @@ const DashboardNavBar = () => {
 
   return (
     <Navbar
-      className={classnames('fixed-top', ' dark-panel-header ')}
+      className={classnames(
+        'navbar-absolute fixed-top ' 
+      )}
       color-on-scroll='300'
       expand='lg'
     >
-      <Container>
-        <div className='navbar-translate'>
+      <Container fluid>
+        <div className='navbar-wrapper'>
           <button
             aria-expanded={navbarCollapse}
             className={classnames('navbar-toggler navbar-toggler', {
