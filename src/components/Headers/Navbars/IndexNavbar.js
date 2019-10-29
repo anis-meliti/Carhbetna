@@ -80,7 +80,7 @@ const IndexNavbar = () => {
     <Collapse className='justify-content-end' navbar isOpen={navbarCollapse}>
       <Nav navbar>
         <NavItem>
-          <NavLink href='/profile'>
+          <NavLink href='/dashboard'>
             <i className='nc-icon' />
             {user.name}
           </NavLink>

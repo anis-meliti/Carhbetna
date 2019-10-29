@@ -32,7 +32,7 @@ function App() {
         <Route exact path='/' render={() => <Index />} />
         <Route exact path='/profile' render={() => <ProfilePage />} />
         <Route exact path='/register' render={() => <RegisterPage />} />
-        <Route path='/dashboard' render={() => <Dashboard />} />
+        <Route path='/dashboard' render={props => <Dashboard {...props} />} />
       </Switch>
     </BrowserRouter>
   );

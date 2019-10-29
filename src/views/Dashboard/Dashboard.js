@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, BrowserRouter, Route } from 'react-router-dom';
-import { Col, Row } from 'reactstrap';
+import { Switch, Route } from 'react-router-dom';
 
 import DashboardNavBar from '../../components/Headers/Navbars/DashboardNavBar';
 import Sidebar from '../../components/SideBar/Sidebar';
@@ -23,8 +22,16 @@ const Dashboard = () => {
       <div className='main-panel'>
         <DashboardNavBar />
         <Switch>
-          <Route exact path='/dashboard/addtraject' component={AddTraject} />
-          <Route exact path='/dashboard/user' component={Alterprofile} />
+          <Route
+            exact
+            path='/dashboard/addtraject'
+            component={props => <AddTraject {...props} />}
+          />
+          <Route
+            exact
+            path='/dashboard/user'
+            component={props => <Alterprofile {...props} />}
+          />
         </Switch>
       </div>
     </div>

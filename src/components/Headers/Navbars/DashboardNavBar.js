@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../../js/actions/auth';
 import { clearProfile } from '../../../js/actions/profile';
 import '../../../assets/css/dashboard.css';
-import {
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  Nav,
-  Container,
-  Button
-} from 'reactstrap';
+import { Collapse, Navbar, NavItem, Nav, Container, Button } from 'reactstrap';
 
 const DashboardNavBar = () => {
-  const [navbarColor, setNavbarColor] = useState('navbar-transparent');
+  const [navbarColor, setNavbarColor] = useState('navbar');
   const [navbarCollapse, setNavbarCollapse] = useState(false);
 
   const toggleNavbarCollapse = () => {
@@ -72,9 +63,7 @@ const DashboardNavBar = () => {
 
   return (
     <Navbar
-      className={classnames(
-        'navbar-absolute fixed-top ' 
-      )}
+      className={classnames('navbar-absolute fixed-top ')}
       color-on-scroll='300'
       expand='lg'
     >
